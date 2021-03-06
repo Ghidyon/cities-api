@@ -21,6 +21,11 @@ function findMatches(wordToMatch, data = cities) {
     });
 }
 
+// Function to add commas to numbers
+function numberWithCommas(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 // Function to display matched items after search
 function displayMatches() {
     const matchArray = findMatches(this.value);
@@ -31,11 +36,12 @@ function displayMatches() {
         // Highlight a yellow color on matched word
         const regex = new RegExp(this.value, 'gi');
         const cityName = item.city.replace(regex, `<span class="hl">${this.value}</span>`);
+        const stateName = item.state.replace(regex, `<span class="hl">${this.value}</span>`);
 
         return `
             <li>
-                <span class="name">${cityName}, ${item.state}</span>
-                <span class="population">${item.population}</span>
+                <span class="name">${cityName}, ${stateName}</span>
+                <span class="population">${numberWithCommas(item.population)}</span>
             </li>
         `;
     }).join(''); // because .map() would return an array, we use join() to join multiple arrays to become string.
