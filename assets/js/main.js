@@ -10,10 +10,10 @@ fetch(endpoint)
 console.log(cities);
 
 // Function for finding matches of states and cities
-const findMatches = (wordToMatch, data = cities) => {
+function findMatches(wordToMatch, data = cities) {
 
     // Returns an array of matched items
-    return data.filter( item => {
+    return data.filter(item => {
         const regex = new RegExp(wordToMatch, 'gi'); // g stands for global search, i stands for case insensitive search
 
         // Filters whenever the city or state matches the searched word
@@ -22,6 +22,23 @@ const findMatches = (wordToMatch, data = cities) => {
 }
 
 // Function to display matched items after search
-const displayMatches = () => {
-    
+function displayMatches() {
+    const matchArray = findMatches(this.value);
+
+    // Map through match array and display get city and state
+    const listItems = matchArray.map(item => {
+        return `
+            <li>
+                <span class="name">${item.city}, ${item.state}</span>
+                <span class="population">${item.population}</span>
+            </li>
+        `;
+    });
+    suggestions.innerHTML = listItems;
 }
+
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+// Listen when user presses a key on the input
+searchInput.addEventListener('keyup', displayMatches);
