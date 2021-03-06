@@ -33,7 +33,7 @@ function displayMatches() {
                 <span class="population">${item.population}</span>
             </li>
         `;
-    });
+    }).join('');
     suggestions.innerHTML = listItems;
 }
 
