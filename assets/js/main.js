@@ -33,18 +33,18 @@ function displayMatches() {
     // Map through match array and display get city and state
     const listItems = matchArray.map(item => {
 
-        // Highlight a yellow color on matched word
+        // Highlight a yellow background-color on matched word
         const regex = new RegExp(this.value, 'gi');
         const cityName = item.city.replace(regex, `<span class="hl">${this.value}</span>`);
         const stateName = item.state.replace(regex, `<span class="hl">${this.value}</span>`);
 
-        return `
-            <li>
-                <span class="name">${cityName}, ${stateName}</span>
-                <span class="population">${numberWithCommas(item.population)}</span>
-            </li>
-        `;
+        return  `<li>
+                    <span class="name">${cityName}, ${stateName}</span>
+                    <span class="population">${numberWithCommas(item.population)}</span>
+                </li>`;
+            
     }).join(''); // because .map() would return an array, we use join() to join multiple arrays to become string.
+
     suggestions.innerHTML = listItems;
 }
 
