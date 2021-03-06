@@ -8,3 +8,20 @@ fetch(endpoint)
     .then(data => cities.push(...data));
 
 console.log(cities);
+
+// Function for finding matches of states and cities
+const findMatches = (wordToMatch, data = cities) => {
+
+    // Returns an array of matched items
+    return data.filter( item => {
+        const regex = new RegExp(wordToMatch, 'gi'); // g stands for global search, i stands for case insensitive search
+
+        // Filters whenever the city or state matches the searched word
+        return item.city.match(regex) || item.state.match(regex);
+    });
+}
+
+// Function to display matched items after search
+const displayMatches = () => {
+    
+}
